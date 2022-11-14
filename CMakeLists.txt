@@ -5,6 +5,8 @@ set(CMAKE_CXX_VERSION 20)
 
 find_package(SDL2 REQUIRED)
 
+add_subdirectory(submodules/light-ecs)
+
 add_library(SDLEngine
   src/Application.cpp
   src/Debug/Assertion.cpp
@@ -12,6 +14,7 @@ add_library(SDLEngine
   src/Events/ApplicationEventHandler.cpp
 )
 target_link_libraries(SDLEngine PUBLIC SDL2)
+target_link_libraries(SDLEngine PUBLIC ECS)
 target_include_directories(SDLEngine PUBLIC include/)
 
 add_executable(app src/Main.cpp)

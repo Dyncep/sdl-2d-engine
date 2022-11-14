@@ -1,0 +1,3 @@
+[submodule "submodules/light-ecs"]
+	path = submodules/light-ecs
+	url = https://github.com/Dyncep/light-ecs
