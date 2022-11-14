@@ -7,13 +7,18 @@
 #include <string>
 
 namespace Dyncep {
+/**
+ * @brief main instance of the application, may be a game, a desktop app,
+ * whatever
+ */
 class Application {
-public: /** @brief constructor
-         * initializes SDL and creates a window and renderer
-         *
-         * @param window_size - the desired window size
-         * @param window_title - the desired window title
-         */
+public:
+  /** @brief constructor
+   * initializes SDL and creates a window and renderer
+   *
+   * @param window_size - the desired window size
+   * @param window_title - the desired window title
+   */
   Application(const Utility::Size &window_size,
               const std::string &window_title);
 
