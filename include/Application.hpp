@@ -1,7 +1,7 @@
 #ifndef DYNCEP_SDL_ENGINE_APPLICATION_HPP
 #define DYNCEP_SDL_ENGINE_APPLICATION_HPP
 
-#include "ECS/Manager.hpp"
+#include "AppECSManager.hpp"
 #include "Events/SDLEventHandler.hpp"
 #include "Utility/Size.hpp"
 #include <SDL2/SDL.h>
@@ -34,6 +34,11 @@ public:
    * @brief retrieve the currently running event of the application
    */
   static SDL_Event &getEvent();
+
+  /**
+   * @brief retrieve the ecs manager of the application
+   */
+  static ECSManager &getECSManager();
 
   /** @brief constructor
    * initializes SDL and creates a window and renderer
@@ -97,7 +102,7 @@ private:
   /**
    * @ecs_manager the ecs manager
    */
-  ECS::Manager ecs_manager{};
+  ECSManager ecs_manager{};
 
   /**
    * @is_running whether the application is running or not

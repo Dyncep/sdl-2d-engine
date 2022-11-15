@@ -30,24 +30,23 @@ public:
    */
   void initialize() override {
 
-    this->position = &this->entity->getComponent<TransformComponent>();
+    this->transform = &this->entity->getComponent<TransformComponent>();
 
     src_rect.x = 0;
     src_rect.y = 0;
 
-    src_rect.w = 50;
-    src_rect.h = 100;
-
-    dest_rect.w = 50;
-    dest_rect.h = 100;
+    src_rect.w = transform->size.width * transform->scale;
+    src_rect.h = transform->size.height * transform->scale;
   }
 
   /**
    * @brief overriden update function
    */
   void update() override {
-    dest_rect.x = this->position->pos.x;
-    dest_rect.y = this->position->pos.y;
+    dest_rect.x = transform->pos.x;
+    dest_rect.y = transform->pos.y;
+    dest_rect.w = transform->size.width * transform->scale;
+    dest_rect.h = transform->size.height * transform->scale;
   }
 
   /**
@@ -59,10 +58,10 @@ public:
 
 private:
   /**
-   * @position the position component which is fetched from the entity in the
+   * @transform the transform component which is fetched from the entity in the
    * initialization
    */
-  TransformComponent *position = nullptr;
+  TransformComponent *transform = nullptr;
 
   /**
    * @texture the sdl texture of the sprite

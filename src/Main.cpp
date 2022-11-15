@@ -3,7 +3,7 @@
 
 int main() {
   auto &app = Dyncep::Application::getInstance();
-  app.initialize({400, 400}, "Hi!");
+  app.initialize({900, 600}, "Hi!");
 
   const int frame_delay = 1000 / 144;
   int frame_time = 0;

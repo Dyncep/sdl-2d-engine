@@ -1,11 +1,21 @@
 #include "Application.hpp"
+#include "Collision.hpp"
+#include "Components/ColliderComponent.hpp"
 #include "Components/KeyboardInputComponent.hpp"
 #include "Components/SpriteComponent.hpp"
+#include "Components/TileComponent.hpp"
 #include "Components/TransformComponent.hpp"
 #include "Debug/Assertion.hpp"
 #include "Events/ApplicationEventHandler.hpp"
+#include <iostream>
 
 namespace Dyncep {
+
+ECS::Entity *player = nullptr;
+ECS::Entity *enemy = nullptr;
+ECS::Entity *tile0 = nullptr;
+ECS::Entity *tile1 = nullptr;
+ECS::Entity *tile2 = nullptr;
 
 Application::Application() {}
 
@@ -17,6 +27,8 @@ Application &Application::getInstance() {
 SDL_Renderer *Application::getRenderer() { return getInstance().renderer; }
 
 SDL_Event &Application::getEvent() { return getInstance().event; }
+
+ECSManager &Application::getECSManager() { return getInstance().ecs_manager; }
 
 Application::~Application() {
   if (renderer != nullptr) {
@@ -45,7 +57,7 @@ void Application::initialize(const Utility::Size &window_size,
   renderer = SDL_CreateRenderer(window, -1, 0);
   Debug::dAssert(renderer != nullptr, "SDL Renderer initialization");
 
-  SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+  SDL_SetRenderDrawColor(renderer, 0, 255, 165, 0);
 
   SDL_RenderClear(renderer);
   SDL_RenderPresent(renderer);
@@ -53,17 +65,32 @@ void Application::initialize(const Utility::Size &window_size,
   is_running = true;
   this->event_handler = new Events::ApplicationEventHandler(this);
 
-  auto &enemy = ecs_manager.addEntity();
-  enemy.addComponent<Components::TransformComponent>(glm::vec2{200, 200});
-  enemy.addComponent<Components::SpriteComponent>("figure-enemy.png");
+  tile0 = &ecs_manager.addEntity();
+  tile1 = &ecs_manager.addEntity();
+  tile2 = &ecs_manager.addEntity();
 
-  auto &player = ecs_manager.addEntity();
-  player.addComponent<Components::TransformComponent>(glm::vec2{50, 200});
-  player.addComponent<Components::SpriteComponent>("figure-player.png");
-  player.addComponent<Components::KeyboardInputComponent>();
+  tile0->addComponent<Components::TileComponent>(SDL_Rect{200, 200, 32, 32}, 0);
+  tile1->addComponent<Components::TileComponent>(SDL_Rect{250, 250, 32, 32}, 1);
+  tile2->addComponent<Components::TileComponent>(SDL_Rect{150, 150, 32, 32}, 2);
+  tile1->addComponent<Components::ColliderComponent>("dirt");
+  tile2->addComponent<Components::ColliderComponent>("grass");
+
+  enemy = &ecs_manager.addEntity();
+  enemy->addComponent<Components::TransformComponent>(glm::vec2{200, 200});
+  enemy->addComponent<Components::SpriteComponent>("figure-enemy.png");
+  enemy->addComponent<Components::ColliderComponent>("Enemy");
+
+  player = &ecs_manager.addEntity();
+  player->addComponent<Components::TransformComponent>(glm::vec2{50, 200});
+  player->addComponent<Components::SpriteComponent>("figure-player.png");
+  player->addComponent<Components::KeyboardInputComponent>();
+  player->addComponent<Components::ColliderComponent>("Player");
 }
 
-void Application::update() { ecs_manager.update(); }
+void Application::update() {
+  ecs_manager.clean();
+  ecs_manager.update();
+}
 
 void Application::render() {
   SDL_RenderClear(renderer);
