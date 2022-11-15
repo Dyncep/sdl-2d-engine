@@ -11,6 +11,7 @@ add_subdirectory(submodules/glm)
 
 add_library(SDLEngine
   src/Application.cpp
+  src/TextureHelper.cpp
   src/Debug/Assertion.cpp
   src/Events/SDLEventHandler.cpp
   src/Events/ApplicationEventHandler.cpp
