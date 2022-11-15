@@ -2,9 +2,9 @@
 #define DYNCEP_SDL_ENGINE_COMPONENTS_SPRITE_COMPONENT_HPP
 
 #include "ECS/Entity.hpp"
-#include "TransformComponent.hpp"
 #include "SDL2/SDL.h"
 #include "TextureHelper.hpp"
+#include "TransformComponent.hpp"
 #include <string>
 
 namespace Dyncep::Components {
@@ -41,8 +41,8 @@ public:
    * @brief overriden update function
    */
   void update() override {
-    dest_rect.x = this->position->getX();
-    dest_rect.y = this->position->getY();
+    dest_rect.x = this->position->pos.x;
+    dest_rect.y = this->position->pos.y;
   }
 
   /**
