@@ -7,6 +7,7 @@ find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 
 add_subdirectory(submodules/light-ecs)
+add_subdirectory(submodules/glm)
 
 add_library(SDLEngine
   src/Application.cpp
@@ -17,6 +18,7 @@ add_library(SDLEngine
 target_link_libraries(SDLEngine PUBLIC SDL2)
 target_link_libraries(SDLEngine PUBLIC SDL2_image)
 target_link_libraries(SDLEngine PUBLIC ECS)
+target_link_libraries(SDLEngine PUBLIC glm)
 target_include_directories(SDLEngine PUBLIC include/)
 
 add_executable(app src/Main.cpp)
