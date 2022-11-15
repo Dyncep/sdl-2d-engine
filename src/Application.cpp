@@ -48,10 +48,11 @@ void Application::initialize(const Utility::Size &window_size,
   this->event_handler = new Events::ApplicationEventHandler(this);
 }
 
-void Application::update() {}
+void Application::update() { ecs_manager.update(); }
 
 void Application::render() {
   SDL_RenderClear(renderer);
+  ecs_manager.render();
   SDL_RenderPresent(renderer);
 }
 
