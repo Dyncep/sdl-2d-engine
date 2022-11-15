@@ -7,18 +7,6 @@ namespace Dyncep {
 class TextureHelper {
 public:
   /**
-   * @brief get the singleton instance
-   */
-  static TextureHelper &getInstance();
-
-  /**
-   * @brief set the renderer
-   *
-   * @param renderer - the desired renderer to set
-   */
-  static void setRenderer(SDL_Renderer *renderer);
-
-  /**
    * @brief load a texture
    *
    * @param resource_path - the path to the resource
@@ -34,18 +22,7 @@ public:
    * @param dest - the destination rectangle
    */
   static void render(SDL_Texture *texture, const SDL_Rect &src,
-                   const SDL_Rect &dest);
-
-private:
-  /**
-   * @brief private constructor
-   */
-  TextureHelper();
-
-  /**
-   * @renderer the renderer used
-   */
-  SDL_Renderer *renderer = nullptr;
+                     const SDL_Rect &dest);
 };
 }; // namespace Dyncep
 

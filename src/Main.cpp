@@ -2,7 +2,8 @@
 #include <SDL2/SDL_timer.h>
 
 int main() {
-  Dyncep::Application app{{400, 400}, "Hi!"};
+  auto &app = Dyncep::Application::getInstance();
+  app.initialize({400, 400}, "Hi!");
 
   const int frame_delay = 1000 / 60;
   int frame_time = 0;
