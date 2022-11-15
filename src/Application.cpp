@@ -1,6 +1,10 @@
 #include "Application.hpp"
+#include "Components/KeyboardInputComponent.hpp"
+#include "Components/SpriteComponent.hpp"
+#include "Components/TransformComponent.hpp"
 #include "Debug/Assertion.hpp"
 #include "Events/ApplicationEventHandler.hpp"
+
 namespace Dyncep {
 
 Application::Application() {}
@@ -48,6 +52,15 @@ void Application::initialize(const Utility::Size &window_size,
 
   is_running = true;
   this->event_handler = new Events::ApplicationEventHandler(this);
+
+  auto &enemy = ecs_manager.addEntity();
+  enemy.addComponent<Components::TransformComponent>(glm::vec2{200, 200});
+  enemy.addComponent<Components::SpriteComponent>("figure-enemy.png");
+
+  auto &player = ecs_manager.addEntity();
+  player.addComponent<Components::TransformComponent>(glm::vec2{50, 200});
+  player.addComponent<Components::SpriteComponent>("figure-player.png");
+  player.addComponent<Components::KeyboardInputComponent>();
 }
 
 void Application::update() { ecs_manager.update(); }

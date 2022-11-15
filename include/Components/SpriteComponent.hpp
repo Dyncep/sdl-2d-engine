@@ -21,6 +21,11 @@ public:
   }
 
   /**
+   * @brief destructor
+   */
+  ~SpriteComponent() { SDL_DestroyTexture(texture); }
+
+  /**
    * @brief overriden initialize function
    */
   void initialize() override {
