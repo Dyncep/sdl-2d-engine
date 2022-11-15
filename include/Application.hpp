@@ -30,6 +30,11 @@ public:
    */
   static SDL_Renderer *getRenderer();
 
+  /**
+   * @brief retrieve the currently running event of the application
+   */
+  static SDL_Event &getEvent();
+
   /** @brief constructor
    * initializes SDL and creates a window and renderer
    *

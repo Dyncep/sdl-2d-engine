@@ -12,6 +12,8 @@ Application &Application::getInstance() {
 
 SDL_Renderer *Application::getRenderer() { return getInstance().renderer; }
 
+SDL_Event &Application::getEvent() { return getInstance().event; }
+
 Application::~Application() {
   if (renderer != nullptr) {
     SDL_DestroyRenderer(renderer);
