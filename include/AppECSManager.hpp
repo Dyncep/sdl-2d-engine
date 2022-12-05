@@ -39,7 +39,7 @@ public:
   }
 
   void update()  {
-
+    ECS::Manager::update();
   }
 
 private:
